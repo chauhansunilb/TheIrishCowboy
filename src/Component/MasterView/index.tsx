@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
-import {StyleProp, View, ViewStyle} from 'react-native';
+import {StatusBar, StyleProp, View, ViewStyle} from 'react-native';
 import masterViewStyle from './styles';
+import { theme } from '../../Shared/theme';
 
 interface AppMasterViewProps {
   children: ReactNode;
@@ -8,5 +9,15 @@ interface AppMasterViewProps {
 }
 
 export const MasterView: React.FC<AppMasterViewProps> = ({children, style}) => {
-  return <View style={[masterViewStyle.container, style]}>{children}</View>;
+  return (
+    <View style={[masterViewStyle.container, style]}>
+      <StatusBar
+        animated={true}
+        backgroundColor={theme.color.bg}
+        barStyle={'light-content'}
+        showHideTransition={'fade'}
+      />
+      {children}
+    </View>
+  );
 };

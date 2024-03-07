@@ -1,15 +1,19 @@
 import React from 'react';
-import {AppButton, AppText, MasterView} from '../Component';
+import {AppButton, AppText, MasterView} from '../../Component';
 import {ImageBackground, View} from 'react-native';
 import styles from './styles';
-import BG from '../../assets/images/gradient_bg.svg';
-import Logo from '../../assets/images/logo.svg';
+import BG from '../../../assets/images/gradient_bg.svg';
+import Logo from '../../../assets/images/logo.svg';
 
-const Welcome = () => {
+const Welcome = ({navigation}: any) => {
+  const onGetStarted = () => {
+    navigation.replace('Root');
+  };
+
   return (
     <MasterView>
       <ImageBackground
-        source={require('../../assets/images/welcome.png')}
+        source={require('../../../assets/images/welcome.png')}
         resizeMode="cover"
         style={styles.image}>
         <BG width={'100%'} style={styles.gradientBg} />
@@ -23,7 +27,11 @@ const Welcome = () => {
           <AppText style={styles.welcomeSub}>
             Ireland to Main Street Florence
           </AppText>
-          <AppButton label="Get Started" containerStyle={styles.buttonContainer}/>
+          <AppButton
+            label="Get Started"
+            containerStyle={styles.buttonContainer}
+            onPress={onGetStarted}
+          />
         </View>
       </ImageBackground>
     </MasterView>

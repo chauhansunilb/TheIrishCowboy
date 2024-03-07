@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {theme} from '../Shared/theme';
+import {theme} from '../../Shared/theme';
 
 const styles = StyleSheet.create({
   image: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSize.bigTitle,
     fontFamily: theme.fontFamily.CFONT_BOLD,
     textAlign: 'center',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
   },
   buttonContainer: {
     borderRadius: 22,

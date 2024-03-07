@@ -9,9 +9,11 @@ export const theme = {
     primary: '#EFEFEF',
     primary2: '#EA5A0A',
     white: '#ffffff',
+    bg: '#222222',
+    bottomNav: '#171717',
   },
   padding: {
-    container: 12,
+    container: 20,
     sm: 16,
   },
   mh4: {
@@ -22,5 +24,7 @@ export const theme = {
     CFONT_MEDIUM: 'CormorantGaramond-Medium',
     CFONT_REGULAR: 'CormorantGaramond-Regular',
     CFONT_SEMIBOLD: 'CormorantGaramond-SemiBold',
+    QFONT_REGULAR: 'QuattrocentoSans-Regular.ttf',
+    QFONT_BOLD: 'QuattrocentoSans-Bold.ttf',
   },
 };

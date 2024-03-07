@@ -16,6 +16,14 @@
     {
       "path": "assets/fonts/CormorantGaramond-SemiBold.ttf",
       "sha1": "c6454efc270b800dae4d4ed6b830f4235ff586b5"
+    },
+    {
+      "path": "assets/fonts/QuattrocentoSans-Bold.ttf",
+      "sha1": "5a213ad3b5a97ead252e886bbbe5fd3603a3dbfa"
+    },
+    {
+      "path": "assets/fonts/QuattrocentoSans-Regular.ttf",
+      "sha1": "274fd0af6bd02268e82ea93ee41b07200b3d1c20"
     }
   ]
 }
