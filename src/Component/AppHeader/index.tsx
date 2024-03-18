@@ -1,14 +1,88 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {FC, ReactNode, useRef} from 'react';
+import {TouchableOpacity, View} from 'react-native';
 import {AppText} from '..';
 import styles from './styles';
 import Logo from '../../../assets/images/round_logo.svg';
+import Notification from '../../../assets/images/notification.svg';
+import Navigation from '../../../assets/images/navigation.svg';
+import {useNavigation} from '@react-navigation/native';
+import ActionSheet, {ActionSheetRef} from 'react-native-actions-sheet';
+import FontAwesome from 'react-native-vector-icons/FontAwesome6';
+import {theme} from '../../Shared/theme';
 
-export const AppHeader = () => {
+interface AppHeaderProps {
+  title?: string;
+  render?: ReactNode;
+  isNotificationIcon?: boolean;
+  isBack?: boolean;
+}
+export const AppHeader: FC<AppHeaderProps> = ({
+  title,
+  render,
+  isNotificationIcon = true,
+  isBack = false,
+}) => {
+  const actionSheetRef = useRef<ActionSheetRef>(null);
+  const navigation: any = useNavigation();
+  const onNotification = () => {
+    navigation.navigate('Notification');
+  };
+
+  const onNavigator = () => {
+    actionSheetRef.current?.show();
+  };
+  const onFlorenceArizona = () => {
+    navigation.navigate('Information');
+    actionSheetRef.current?.hide();
+  };
+  const onOutliningIreland = () => {
+    navigation.navigate('Information', {isOutliningIreland: true});
+    actionSheetRef.current?.hide();
+  };
+
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
-      <Logo height={50} />
-      <AppText style={styles.title}>Welcome To The Irish Cowboy</AppText>
+      {isBack && (
+        <TouchableOpacity
+          activeOpacity={theme.activeOpacity}
+          style={styles.backStyle}
+          onPress={goBack}>
+          <FontAwesome name="arrow-left" color={theme.color.white} size={20} />
+        </TouchableOpacity>
+      )}
+      <Logo height={50} width={50} />
+
+      <View style={styles.titlContainer}>
+        {title ? <AppText style={styles.title}>{title}</AppText> : null}
+        {render ? render : null}
+      </View>
+      <TouchableOpacity onPress={onNavigator} style={styles.navigator}>
+        <Navigation style={styles.navigator} />
+      </TouchableOpacity>
+      {isNotificationIcon ? (
+        <TouchableOpacity
+          onPress={onNotification}
+          style={styles.notificationContainer}>
+          <View>
+            <Notification />
+            <View style={styles.notificationBadge} />
+          </View>
+        </TouchableOpacity>
+      ) : null}
+      <ActionSheet ref={actionSheetRef} useBottomSafeAreaPadding>
+        <View style={styles.actionSheetContainer}>
+          <TouchableOpacity onPress={onFlorenceArizona}>
+            <AppText style={styles.menu}>Florence Arizona</AppText>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onOutliningIreland}>
+            <AppText style={styles.menu}>Outlining Ireland</AppText>
+          </TouchableOpacity>
+        </View>
+      </ActionSheet>
     </View>
   );
 };
