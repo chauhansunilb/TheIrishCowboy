@@ -1,7 +1,8 @@
 import React, {ReactNode} from 'react';
 import {StatusBar, StyleProp, View, ViewStyle} from 'react-native';
 import masterViewStyle from './styles';
-import { theme } from '../../Shared/theme';
+import {theme} from '../../Shared/theme';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface AppMasterViewProps {
   children: ReactNode;
@@ -10,7 +11,10 @@ interface AppMasterViewProps {
 
 export const MasterView: React.FC<AppMasterViewProps> = ({children, style}) => {
   return (
-    <View style={[masterViewStyle.container, style]}>
+    <SafeAreaView
+      style={[masterViewStyle.container, style]}
+      mode="padding"
+      edges={['top']}>
       <StatusBar
         animated={true}
         backgroundColor={theme.color.bg}
@@ -18,6 +22,6 @@ export const MasterView: React.FC<AppMasterViewProps> = ({children, style}) => {
         showHideTransition={'fade'}
       />
       {children}
-    </View>
+    </SafeAreaView>
   );
 };

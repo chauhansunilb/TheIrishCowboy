@@ -11,6 +11,7 @@ import styles from './styles';
 import {Image} from 'react-native';
 import {getRequest} from '../../Util/HttpUtility';
 import {MENUDETAIL} from '../../Util/ApiConst';
+import {removeSpecialCharacter} from '../../Util/Const';
 
 const CategoryMenuDetail = ({route}: any) => {
   const [search, setSearch] = useState('');
@@ -28,7 +29,7 @@ const CategoryMenuDetail = ({route}: any) => {
       let menuDetailResponse: any = await getRequest(url);
       setLoading(false);
       setDetail(menuDetailResponse);
-      console.log(MENUDETAIL)
+      console.log(MENUDETAIL);
     } catch (e) {
       console.log('===>api error', e);
       setLoading(false);
@@ -45,9 +46,12 @@ const CategoryMenuDetail = ({route}: any) => {
           isBack={true}
           render={
             <View style={styles.titleContainer}>
-              <AppText style={styles.title}>Our Food Menu</AppText>
-              <AppText style={[styles.title, styles.subTitle]}>
-                (11am to 8pm)
+              <AppText style={styles.title}>
+                Our Food Menu
+                <AppText style={[styles.title, styles.subTitle]}>
+                  {' '}
+                  (11am to 8pm)
+                </AppText>
               </AppText>
             </View>
           }
@@ -73,7 +77,9 @@ const CategoryMenuDetail = ({route}: any) => {
               <AppText style={styles.price}>
                 ${Math.floor(item?.food_item_price)?.toFixed(2)}
               </AppText>
-              <AppText style={styles.desc}>{item?.food_item_content}</AppText>
+              <AppText style={styles.desc}>
+                {removeSpecialCharacter(item?.food_item_content)}
+              </AppText>
             </View>
           </View>
         </ScrollView>

@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
     width: '100%',
     ...theme.shadow,
   },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+
   image: {
     height: 250,
     width: '100%',

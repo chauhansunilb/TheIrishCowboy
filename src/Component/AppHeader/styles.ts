@@ -1,11 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {theme} from '../../Shared/theme';
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: Platform.OS === 'android' ? 10 : 0,
     paddingHorizontal: theme.padding.sm,
     // paddingBottom: 6,
   },

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   error: {
     fontSize: theme.fontSize.small,
     color: theme.color.primary2,
-  }
+  },
 });
 
 export default styles;

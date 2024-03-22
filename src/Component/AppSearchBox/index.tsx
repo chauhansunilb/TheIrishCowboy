@@ -10,6 +10,7 @@ interface AppSearchBoxProps {
   placeholder?: string;
   readOnly?: boolean;
   onChangeText?: (text: string) => void;
+  [key: string]: any;
 }
 
 export const AppSearchBox: FC<AppSearchBoxProps> = ({
@@ -17,6 +18,7 @@ export const AppSearchBox: FC<AppSearchBoxProps> = ({
   placeholder,
   onChangeText,
   readOnly,
+  ...rest
 }) => {
   return (
     <View style={styles.container}>
@@ -32,6 +34,7 @@ export const AppSearchBox: FC<AppSearchBoxProps> = ({
         placeholder={placeholder}
         placeholderTextColor={theme.color.primary}
         readOnly={readOnly}
+        {...rest}
       />
       <AntDesign name="search1" size={16} color={theme.color.primary} />
     </View>

@@ -43,6 +43,7 @@ const Information = ({navigation, route}: any) => {
         title={
           item?.isOutliningIreland ? 'Outlining Ireland' : 'Florence Arizona'
         }
+        isBack={true}
       />
       <ImageBackground
         source={require('../../../assets/images/home_bg.png')}

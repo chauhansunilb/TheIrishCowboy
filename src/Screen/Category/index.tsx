@@ -148,9 +148,12 @@ const Category = ({navigation, route}: any) => {
         <AppHeader
           render={
             <View style={styles.titleContainer}>
-              <AppText style={styles.title}>Our Food Menu</AppText>
-              <AppText style={[styles.title, styles.subTitle]}>
-                (11am to 8pm)
+              <AppText style={styles.title}>
+                Our Food Menu
+                <AppText style={[styles.title, styles.subTitle]}>
+                  {' '}
+                  (11am to 8pm)
+                </AppText>
               </AppText>
             </View>
           }

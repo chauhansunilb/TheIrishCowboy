@@ -24,6 +24,22 @@ const styles = StyleSheet.create({
   input: {
     marginTop: theme.padding.xsm,
   },
+  viewInput: {
+    borderColor: theme.color.border,
+    borderBottomWidth: 2,
+    height: 44,
+    justifyContent: 'center',
+    paddingHorizontal: theme.padding.xsm,
+  },
+  inputText: {
+    fontFamily: theme.fontFamily.QFONT_REGULAR,
+    fontSize: theme.fontSize.small,
+    color: theme.color.primary,
+  },
+  error: {
+    fontSize: theme.fontSize.small,
+    color: theme.color.primary2,
+  },
   buttonContainer: {
     alignItems: 'center',
     marginTop: theme.padding.container,

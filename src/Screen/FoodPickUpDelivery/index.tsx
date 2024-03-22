@@ -11,6 +11,7 @@ import styles from './styles';
 import {FOODPICKUPDELIVERY} from '../../Util/ApiConst';
 import {getRequest} from '../../Util/HttpUtility';
 import FastImage from 'react-native-fast-image';
+import {removeSpecialCharacter} from '../../Util/Const';
 
 const FoodPickUpDelivery = ({navigation}: any) => {
   const [isLoading, setLoading] = useState(true);
@@ -59,7 +60,9 @@ const FoodPickUpDelivery = ({navigation}: any) => {
               </View>
               <View style={styles.cardContainer}>
                 <AppText style={styles.cardTitle}>{info?.[0].title}</AppText>
-                <AppText style={styles.desc}>{info?.[0]?.content}</AppText>
+                <AppText style={styles.desc}>
+                  {removeSpecialCharacter(info?.[0]?.content)}
+                </AppText>
                 <View style={styles.buttonContainer}>
                   <AppButton
                     label={info?.[0]?.button_link?.title}
