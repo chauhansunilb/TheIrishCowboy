@@ -73,14 +73,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // alignItems: 'center',
   },
+  titleIconContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
   subCatTitle: {
     fontFamily: theme.fontFamily.QFONT_BOLD,
     fontSize: theme.fontSize.small,
-    flex: 1,
-    marginBottom: 12,
+    // flex: 1,
+    marginRight: 8,
   },
   subItemDes: {
     // marginTop: 8,
+    paddingBottom: 8
   },
   bottomButtonContainer: {
     position: 'absolute',

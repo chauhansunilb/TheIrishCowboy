@@ -5,8 +5,17 @@ import textStyle from './style';
 interface AppTextProps {
   children: ReactNode;
   style?: StyleProp<TextStyle>;
+  [key: string]: any;
 }
 
-export const AppText: React.FC<AppTextProps> = ({children, style = {}}) => {
-  return <Text style={[textStyle.textStyle, style]}>{children}</Text>;
+export const AppText: React.FC<AppTextProps> = ({
+  children,
+  style = {},
+  ...rest
+}) => {
+  return (
+    <Text style={[textStyle.textStyle, style]} {...rest}>
+      {children}
+    </Text>
+  );
 };

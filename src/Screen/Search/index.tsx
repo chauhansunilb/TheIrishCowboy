@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   AppHeader,
+  AppMenu,
   AppProgressBar,
   AppSearchBox,
   AppText,
@@ -20,7 +21,18 @@ const Search = ({navigation}: any) => {
   const [item, setItem] = useState([]);
 
   const onMenuPress = (_item: any) => {
-    navigation.push('CategoryMenuDetail', {item: _item});
+    console.log('===>', _item);
+    if (_item?.food_item_title) {
+      const itemData = {
+        food_item_title_mobile: _item?.food_item_title,
+        food_menu_icon_mobile: _item?.food_menu_icon,
+        food_item_price_mobile: _item?.food_item_price,
+        food_item_content_mobile: _item?.food_item_content,
+      };
+      navigation.push('CategoryMenuDetail', {item: itemData});
+    } else if(_item?.food_item_title_mobile){
+      navigation.push('CategoryMenuDetail', {item: _item});
+    }
   };
 
   const fetchResult = async () => {
@@ -49,7 +61,7 @@ const Search = ({navigation}: any) => {
         ) : null}
         {item?.food_item_price ? (
           <AppText style={[styles.label, styles.noteLbl]}>
-            ${Math.floor(item?.food_item_price)?.toFixed(2)}
+            ${(+item?.food_item_price)?.toFixed(2)}
           </AppText>
         ) : null}
       </View>
@@ -97,6 +109,8 @@ const Search = ({navigation}: any) => {
               onChangeText={setSearch}
               returnKeyType="search"
               onSubmitEditing={fetchResult}
+              onSearch={fetchResult}
+              onBack={() => setSearch('')}
             />
           </View>
           {search ? (
@@ -106,7 +120,8 @@ const Search = ({navigation}: any) => {
                 style={[styles.lbl, styles.lblSearch]}>{`"${search}"`}</AppText>
             </AppText>
           ) : null}
-          <View style={styles.flex1}>
+          <AppMenu navigation={navigation} />
+          <View style={[styles.flex1, styles.horizontailMargin]}>
             <FlatList
               data={item}
               showsVerticalScrollIndicator={false}

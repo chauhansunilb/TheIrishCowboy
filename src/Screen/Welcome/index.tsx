@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {AppButton, AppProgressBar, AppText, MasterView} from '../../Component';
-import {ImageBackground, View, Dimensions} from 'react-native';
+import {ImageBackground, Platform, View} from 'react-native';
 import styles from './styles';
 import BG from '../../../assets/images/gradient_bg.svg';
 import Logo from '../../../assets/images/logo.svg';
 import Video from 'react-native-video';
-import {WELCOME} from '../../Util/ApiConst';
-import {getRequest} from '../../Util/HttpUtility';
+import {TOKEN, WELCOME} from '../../Util/ApiConst';
+import {getRequest, postRequest} from '../../Util/HttpUtility';
+import messaging from '@react-native-firebase/messaging';
+import {PermissionsAndroid} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface ApiResponse {
   wl_banner_image?: string;
@@ -23,7 +26,56 @@ const Welcome = ({navigation}: any) => {
 
   useEffect(() => {
     getWelcomeData();
+    requestUserPermission();
   }, []);
+
+  async function requestUserPermission() {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+      );
+      // console.log('==>1granted', granted);
+      // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      //   console.log('==>', granted);
+      //   postToken();
+      // }
+      postToken();
+    } else {
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+      if (enabled) {
+        postToken();
+      }
+    }
+  }
+
+  const postToken = async () => {
+    try {
+      messaging()
+        .getToken()
+        .then(async (token: string) => {
+          console.log('===>token', token);
+          const storedToken = await AsyncStorage.getItem('fcmToken');
+          if (token !== storedToken) {
+            await AsyncStorage.setItem('fcmToken', token);
+            let url = TOKEN;
+            let params = {
+              token,
+            } as any;
+            if (storedToken) {
+              params.old_token = storedToken;
+            }
+            let tokenResponse: any = await postRequest(url, params);
+            console.log('===>', tokenResponse);
+          }
+        });
+    } catch (e) {
+      console.log('===>api error', e);
+    }
+  };
 
   const getWelcomeData = async () => {
     try {

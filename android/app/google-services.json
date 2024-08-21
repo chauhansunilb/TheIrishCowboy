@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "12863199548",
+    "project_id": "theirishcowboy-b95d5",
+    "storage_bucket": "theirishcowboy-b95d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12863199548:android:b984cc8f1f66f1747c6639",
+        "android_client_info": {
+          "package_name": "com.theirishcowboy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnZCVKE5ToKJewno-2v_-o6jV8rFt4B_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

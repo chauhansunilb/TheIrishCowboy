@@ -28,8 +28,17 @@ const Notification = ({navigation}: any) => {
       let url = `${NOTIFICATION}&time=${Math.random()}`;
       let notificationResponse: any = await getRequest(url);
       if (notificationResponse) {
+        notificationResponse.sort((a: any, b: any) => {
+          let dateA = new Date(
+            a.notification_date.split('/').reverse().join('-'),
+          ) as any;
+          let dateB = new Date(
+            b.notification_date.split('/').reverse().join('-'),
+          ) as any;
+
+          return dateB - dateA;
+        });
         setNotification(notificationResponse);
-        console.log('===>notificationResponse', notificationResponse, url);
         setLoading(false);
       }
     } catch (e) {

@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingTop: 6,
-    paddingHorizontal: theme.padding.sm,
     flex: 1,
   },
   lable: {
     fontFamily: theme.fontFamily.QFONT_REGULAR,
     fontSize: theme.fontSize.xsmall,
     lineHeight: 18,
+    paddingHorizontal: theme.padding.sm,
   },
   subCategoryContainer: {
     backgroundColor: theme.color.cardBG,
@@ -35,8 +35,12 @@ const styles = StyleSheet.create({
   flex1: {
     flex: 1,
   },
-  eventFlatlist:{
+  eventFlatlist: {
     paddingBottom: 20,
+    paddingHorizontal: theme.padding.sm,
+  },
+  m10: {
+    marginTop: 8,
   },
   textContainer: {
     marginLeft: 12,

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: theme.padding.sm,
     marginTop: 10,
-    paddingBottom: theme.padding.sm,
+    // paddingBottom: theme.padding.sm,
   },
   imageContainer: {
     height: 220,
@@ -44,10 +44,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 15,
     padding: theme.padding.sm,
+    marginVertical: 14,
+    marginHorizontal: theme.padding.sm,
   },
   cardTitle: {
     fontFamily: theme.fontFamily.QFONT_BOLD,
     fontSize: theme.fontSize.largeTitle,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   price: {
     fontFamily: theme.fontFamily.QFONT_BOLD,

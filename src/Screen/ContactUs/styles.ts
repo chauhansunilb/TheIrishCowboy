@@ -3,15 +3,15 @@ import {theme} from '../../Shared/theme';
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: theme.padding.sm,
-    paddingVertical: theme.padding.container,
+    paddingTop: theme.padding.container,
+    marginHorizontal: theme.padding.sm,
   },
   imageContainer: {
     borderRadius: 10,
     overflow: 'hidden',
     height: 250,
     width: '100%',
-    ...theme.shadow,
+    flex: 1,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   contactContainer: {
     paddingHorizontal: theme.padding.xsm,
     marginTop: theme.padding.container,
+    marginHorizontal: theme.padding.sm,
   },
   contactDetail: {
     flexDirection: 'row',
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
     marginTop: theme.padding.container,
+    marginBottom: 20,
   },
   btnContainer: {
     height: 36,

@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSize.small,
   },
   container: {
-    paddingHorizontal: theme.padding.sm,
     marginTop: 10,
     paddingBottom: theme.padding.sm,
   },
@@ -46,6 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: theme.padding.sm,
     marginVertical: theme.padding.xsm,
+    marginHorizontal: theme.padding.sm,
   },
   cardTitle: {
     fontFamily: theme.fontFamily.QFONT_BOLD,

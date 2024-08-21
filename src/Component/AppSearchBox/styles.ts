@@ -18,7 +18,15 @@ const styles = StyleSheet.create({
     height: 40,
     fontFamily: theme.fontFamily.QFONT_REGULAR,
     fontSize: theme.fontSize.small,
+    marginRight: 6,
   },
+  readonlyInput: {
+    color: theme.color.white,
+    flex: 1,
+    marginLeft: 12,
+    fontFamily: theme.fontFamily.QFONT_REGULAR,
+    fontSize: theme.fontSize.small,
+  }
 });
 
 export default styles;

@@ -3,6 +3,7 @@ import {
   AppButton,
   AppHeader,
   AppInput,
+  AppMenu,
   AppProgressBar,
   AppText,
   MasterView,
@@ -149,94 +150,95 @@ const TableReservation = ({navigation}: any) => {
   return (
     <MasterView>
       <AppHeader title="Table Booking" isBack={true} />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <View style={styles.container}>
-            <View style={styles.imageContainer}>
-              <FastImage
-                source={{uri: info?.table_booking_image}}
-                style={styles.image}
-                resizeMode="cover"
-              />
-            </View>
-            <View style={styles.formContainer}>
-              <AppInput
-                placeholder="Name"
-                value={formData?.name}
-                onChangeText={text => onChangeHandler('name', text)}
-                error={errors?.name}
-              />
-              <AppInput
-                style={styles.input}
-                placeholder="Telephone Number"
-                inputMode="tel"
-                value={formData?.phone}
-                onChangeText={text => onChangeHandler('phone', text)}
-                error={errors?.phone}
-              />
-              <AppInput
-                style={styles.input}
-                placeholder="Email Address"
-                autoComplete="email"
-                inputMode="email"
-                value={formData?.email}
-                onChangeText={text => onChangeHandler('email', text)}
-                error={errors?.email}
-              />
-              <TouchableOpacity
-                activeOpacity={theme.activeOpacity}
-                onPress={() => setDatePicker(true)}>
-                <View style={[styles.input, styles.viewInput]}>
-                  <AppText style={styles.inputText}>
-                    {formData?.date
-                      ? moment(formData?.date).format(DDMMMYYYY)
-                      : 'Select Date'}
-                  </AppText>
-                </View>
-              </TouchableOpacity>
-              {errors.date ? (
-                <AppText style={styles.error}>{errors.date}</AppText>
-              ) : null}
-              <AppInput
-                style={styles.input}
-                placeholder="Number of Guests"
-                inputMode="tel"
-                value={formData?.guests}
-                onChangeText={text => onChangeHandler('guests', text)}
-                error={errors?.guests}
-              />
-              <AppInput
-                style={styles.input}
-                multiline={true}
-                numberOfLines={4}
-                placeholder="Further Requirements"
-                value={formData?.requirement}
-                onChangeText={text => onChangeHandler('requirement', text)}
-                error={errors?.requirement}
-              />
-              <View style={styles.buttonContainer}>
-                <AppButton
-                  label="Submit"
-                  containerStyle={styles.btnContainer}
-                  labelStyle={styles.btnLbl}
-                  onPress={onSubmit}
-                />
-              </View>
-              <View style={styles.noteContainer}>
-                <AppText style={[styles.label, styles.noteLbl]}>
-                  NOTE
-                  <AppText style={[styles.label]}>
-                    {' '}
-                    - Note by submitting this online request does not guarantee
-                    the booking, one of our management staff will contact you
-                    shortly with a confirmation
-                  </AppText>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{flex: 1}}
+        automaticallyAdjustKeyboardInsets={true}>
+        <View style={styles.container}>
+          <View style={styles.imageContainer}>
+            <FastImage
+              source={{uri: info?.table_booking_image}}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          </View>
+          <AppMenu navigation={navigation} />
+          <View style={styles.formContainer}>
+            <AppInput
+              placeholder="Name"
+              value={formData?.name}
+              onChangeText={text => onChangeHandler('name', text)}
+              error={errors?.name}
+            />
+            <AppInput
+              style={styles.input}
+              placeholder="Telephone Number"
+              inputMode="tel"
+              value={formData?.phone}
+              onChangeText={text => onChangeHandler('phone', text)}
+              error={errors?.phone}
+            />
+            <AppInput
+              style={styles.input}
+              placeholder="Email Address"
+              autoComplete="email"
+              inputMode="email"
+              value={formData?.email}
+              onChangeText={text => onChangeHandler('email', text)}
+              error={errors?.email}
+            />
+            <TouchableOpacity
+              activeOpacity={theme.activeOpacity}
+              onPress={() => setDatePicker(true)}>
+              <View style={[styles.input, styles.viewInput]}>
+                <AppText style={styles.inputText}>
+                  {formData?.date
+                    ? moment(formData?.date).format(DDMMMYYYY)
+                    : 'Select Date'}
                 </AppText>
               </View>
+            </TouchableOpacity>
+            {errors.date ? (
+              <AppText style={styles.error}>{errors.date}</AppText>
+            ) : null}
+            <AppInput
+              style={styles.input}
+              placeholder="Number of Guests"
+              inputMode="tel"
+              value={formData?.guests}
+              onChangeText={text => onChangeHandler('guests', text)}
+              error={errors?.guests}
+            />
+            <AppInput
+              style={styles.input}
+              multiline={true}
+              numberOfLines={4}
+              placeholder="Further Requirements"
+              value={formData?.requirement}
+              onChangeText={text => onChangeHandler('requirement', text)}
+              error={errors?.requirement}
+            />
+            <View style={styles.buttonContainer}>
+              <AppButton
+                label="Submit"
+                containerStyle={styles.btnContainer}
+                labelStyle={styles.btnLbl}
+                onPress={onSubmit}
+              />
+            </View>
+            <View style={styles.noteContainer}>
+              <AppText style={[styles.label, styles.noteLbl]}>
+                NOTE
+                <AppText style={[styles.label]}>
+                  {' '}
+                  - Note by submitting this online request does not guarantee
+                  the booking, one of our management staff will contact you
+                  shortly with a confirmation
+                </AppText>
+              </AppText>
             </View>
           </View>
-        </KeyboardAvoidingView>
+        </View>
       </ScrollView>
       <DatePicker
         modal

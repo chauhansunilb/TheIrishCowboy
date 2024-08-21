@@ -6,12 +6,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    paddingHorizontal: theme.padding.sm,
     paddingVertical: theme.padding.container,
   },
   imageContainer: {
     borderRadius: 10,
     overflow: 'hidden',
+    marginHorizontal: theme.padding.sm,
     ...theme.shadow,
   },
   image: {
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 15,
     padding: theme.padding.sm,
+    marginHorizontal: theme.padding.sm,
   },
   cardTitle: {
     fontFamily: theme.fontFamily.CFONT_BOLD,

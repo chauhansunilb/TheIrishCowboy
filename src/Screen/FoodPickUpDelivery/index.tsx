@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {
   AppButton,
   AppHeader,
+  AppMenu,
   AppProgressBar,
   AppText,
   MasterView,
 } from '../../Component';
-import {ScrollView, View, Image, ImageBackground} from 'react-native';
+import {ScrollView, View, Image, ImageBackground, Linking} from 'react-native';
 import styles from './styles';
 import {FOODPICKUPDELIVERY} from '../../Util/ApiConst';
 import {getRequest} from '../../Util/HttpUtility';
@@ -35,10 +36,14 @@ const FoodPickUpDelivery = ({navigation}: any) => {
   };
 
   const onPickupOrder = () => {
-    navigation.push('TableReservation');
+    // navigation.push('TableReservation');
+    // Linking.openURL(info?.[0]?.button_link?.url);
+    navigation.push('WebActivity', {url: info?.[0]?.button_link?.url});
   };
   const onDeliveryOrder = () => {
-    navigation.push('TableReservation');
+    // navigation.push('TableReservation');
+    // Linking.openURL(info?.[1]?.button_link?.url);
+    navigation.push('WebActivity', {url: info?.[1]?.button_link?.url});
   };
 
   return (
@@ -58,6 +63,7 @@ const FoodPickUpDelivery = ({navigation}: any) => {
                   resizeMode="cover"
                 />
               </View>
+              <AppMenu navigation={navigation} />
               <View style={styles.cardContainer}>
                 <AppText style={styles.cardTitle}>{info?.[0].title}</AppText>
                 <AppText style={styles.desc}>
@@ -81,7 +87,9 @@ const FoodPickUpDelivery = ({navigation}: any) => {
               </View>
               <View style={styles.cardContainer}>
                 <AppText style={styles.cardTitle}>{info?.[1]?.title}</AppText>
-                <AppText style={styles.desc}>{info?.[1]?.content}</AppText>
+                <AppText style={styles.desc}>
+                  {removeSpecialCharacter(info?.[1]?.content)}
+                </AppText>
                 <View style={styles.buttonContainer}>
                   <AppButton
                     label={info?.[1]?.button_link?.title}

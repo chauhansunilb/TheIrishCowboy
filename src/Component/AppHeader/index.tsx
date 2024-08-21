@@ -4,6 +4,8 @@ import {AppText} from '..';
 import styles from './styles';
 import Logo from '../../../assets/images/round_logo.svg';
 import Notification from '../../../assets/images/notification.svg';
+import Camera from '../../../assets/images/camera.svg';
+import News from '../../../assets/images/news.svg';
 import Navigation from '../../../assets/images/navigation.svg';
 import {useNavigation} from '@react-navigation/native';
 import ActionSheet, {ActionSheetRef} from 'react-native-actions-sheet';
@@ -20,7 +22,7 @@ export const AppHeader: FC<AppHeaderProps> = ({
   title,
   render,
   isNotificationIcon = true,
-  isBack = false,
+  isBack = true,
 }) => {
   const actionSheetRef = useRef<ActionSheetRef>(null);
   const navigation: any = useNavigation();
@@ -35,6 +37,15 @@ export const AppHeader: FC<AppHeaderProps> = ({
     navigation.navigate('Information');
     actionSheetRef.current?.hide();
   };
+
+  const onGalleryPress = () => {
+    navigation.navigate('Gallery');
+  };
+
+  const onNews = () => {
+    navigation.navigate('News');
+  };
+
   const onOutliningIreland = () => {
     navigation.navigate('Information', {isOutliningIreland: true});
     actionSheetRef.current?.hide();
@@ -60,15 +71,17 @@ export const AppHeader: FC<AppHeaderProps> = ({
         {title ? <AppText style={styles.title}>{title}</AppText> : null}
         {render ? render : null}
       </View>
-      <TouchableOpacity onPress={onNavigator} style={styles.navigator}>
-        <Navigation style={styles.navigator} />
+      <TouchableOpacity onPress={onGalleryPress} style={styles.navigator}>
+        {/*onNavigator */}
+        {/* <Navigation style={styles.navigator} /> */}
+        <Camera style={styles.navigator} />
       </TouchableOpacity>
       {isNotificationIcon ? (
-        <TouchableOpacity
-          onPress={onNotification}
-          style={styles.notificationContainer}>
+        <TouchableOpacity onPress={onNews} style={styles.notificationContainer}>
+          {/* onNotification */}
           <View>
-            <Notification />
+            {/* <Notification /> */}
+            <News />
             <View style={styles.notificationBadge} />
           </View>
         </TouchableOpacity>

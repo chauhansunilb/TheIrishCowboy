@@ -18,16 +18,20 @@ const styles = StyleSheet.create({
     fontSize: theme.fontSize.small,
   },
   container: {
-    paddingHorizontal: theme.padding.sm,
     flex: 1,
   },
   searchContainer: {
     marginTop: 10,
+    marginHorizontal: theme.padding.sm,
   },
   lbl: {
     fontFamily: theme.fontFamily.QFONT_REGULAR,
     fontSize: theme.fontSize.small,
     marginTop: theme.padding.sm,
+    marginHorizontal: theme.padding.sm,
+  },
+  horizontailMargin: {
+    marginHorizontal: theme.padding.sm,
   },
   lblSearch: {
     color: theme.color.primary2,

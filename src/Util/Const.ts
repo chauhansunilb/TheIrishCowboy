@@ -19,5 +19,5 @@ export const isRequired = (value: string | undefined) => {
 };
 
 export const removeSpecialCharacter = (text: string) => {
-  return text.replace(/<\/?[^>]+(>|$)/g, '');
+  return text.replace(/<\/?[^>]+(>|$)/g, '').replace(/&amp;/g, '&');
 };

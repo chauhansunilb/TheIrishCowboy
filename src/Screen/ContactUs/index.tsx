@@ -4,6 +4,7 @@ import {
   AppButton,
   AppHeader,
   AppInput,
+  AppMenu,
   AppProgressBar,
   AppText,
   MasterView,
@@ -29,7 +30,7 @@ interface FormData {
   [key: string]: string;
 }
 
-const ContactUs = () => {
+const ContactUsPage = ({navigation}: any) => {
   const [formData, setFormData] = useState<FormData>({});
   const [errors, setErrors] = useState<FormData>({});
   const [isLoading, setLoading] = useState(true);
@@ -47,6 +48,7 @@ const ContactUs = () => {
       if (infoResponse) {
         setInfo(infoResponse[0]);
       }
+      console.log('====>infoResponse', infoResponse);
     } catch (e) {
       console.log('===>api error', e);
       setLoading(false);
@@ -120,7 +122,6 @@ const ContactUs = () => {
         let url = `${CONTACTUS}`;
         setLoading(true);
         let result: any = await postRequest(url, body);
-        console.log('----<', result);
         if (result) {
           setFormData({});
           Alert.alert('The Irish Cowboy', result, [
@@ -138,118 +139,117 @@ const ContactUs = () => {
   return (
     <MasterView>
       <AppHeader title="Contact Us" isBack={true} />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        automaticallyAdjustKeyboardInsets={true}>
+        <>
           <View style={styles.container}>
             <View style={styles.imageContainer}>
-              {/* <Image
-              source={require('../../../assets/images/map.png')}
-              style={styles.image}
-              resizeMode="cover"
-            /> */}
-              <MapView
-                style={styles.map}
-                provider={PROVIDER_GOOGLE}
-                initialRegion={{
-                  latitude: 33.03463747077481,
-                  longitude: -111.3897129237139,
-                  latitudeDelta: 0.005,
-                  longitudeDelta: 0.005,
-                }}>
-                <Marker
-                  coordinate={{
-                    latitude: 33.03463747077481,
-                    longitude: -111.3897129237139,
-                  }}
-                />
-              </MapView>
-            </View>
-            <View style={styles.contactContainer}>
-              <AppText style={styles.title}>{info?.contact_title}</AppText>
-              <View style={styles.contactDetail}>
-                <View style={styles.iconBox}>
-                  <MaterialCommunityIcons
-                    name="location-on"
-                    size={20}
-                    color={theme.color.primary2}
+              {info?.google_map_latitude && info?.google_map_longitude && (
+                <MapView
+                  style={styles.map}
+                  provider={PROVIDER_GOOGLE}
+                  initialRegion={{
+                    latitude: +info?.google_map_latitude,
+                    longitude: +info?.google_map_longitude,
+                    latitudeDelta: 0.005,
+                    longitudeDelta: 0.005,
+                  }}>
+                  <Marker
+                    coordinate={{
+                      latitude: +info?.google_map_latitude,
+                      longitude: +info?.google_map_longitude,
+                    }}
                   />
-                </View>
-                <AppText style={styles.lbl}>{info?.addresss}</AppText>
-              </View>
-              <View style={styles.contactDetail}>
-                <View style={styles.iconBox}>
-                  <Ionicons
-                    name="call-sharp"
-                    size={20}
-                    color={theme.color.primary2}
-                  />
-                </View>
-                <AppText style={styles.lbl}>{info?.phone_number}</AppText>
-              </View>
-              <View style={styles.contactDetail}>
-                <View style={styles.iconBox}>
-                  <Entypo name="mail" size={20} color={theme.color.primary2} />
-                </View>
-                <AppText style={styles.lbl}>{info?.email_address}</AppText>
-              </View>
-              <AppText style={[styles.title, styles.getInTouch]}>
-                {info?.form_title}
-              </AppText>
-              <AppInput
-                style={styles.input}
-                placeholder="Name"
-                value={formData?.name}
-                onChangeText={text => onChangeHandler('name', text)}
-                error={errors?.name}
-              />
-              <AppInput
-                style={styles.input}
-                placeholder="Email"
-                autoComplete="email"
-                inputMode="email"
-                value={formData?.email}
-                onChangeText={text => onChangeHandler('email', text)}
-                error={errors?.email}
-              />
-              <AppInput
-                style={styles.input}
-                placeholder="Subject"
-                value={formData?.subject}
-                onChangeText={text => onChangeHandler('subject', text)}
-                error={errors?.subject}
-              />
-              <AppInput
-                style={styles.input}
-                placeholder="Phone Number"
-                inputMode="tel"
-                value={formData?.number}
-                onChangeText={text => onChangeHandler('number', text)}
-                error={errors?.number}
-              />
-              <AppInput
-                style={styles.input}
-                placeholder="Message"
-                multiline={true}
-                value={formData?.message}
-                onChangeText={text => onChangeHandler('message', text)}
-                error={errors?.message}
-              />
-              <View style={styles.buttonContainer}>
-                <AppButton
-                  label="Submit"
-                  containerStyle={styles.btnContainer}
-                  labelStyle={styles.btnLbl}
-                  onPress={onSubmit}
-                />
-              </View>
+                </MapView>
+              )}
             </View>
           </View>
-        </KeyboardAvoidingView>
+          <AppMenu navigation={navigation} />
+          <View style={styles.contactContainer}>
+            <AppText style={styles.title}>{info?.contact_title}</AppText>
+            <View style={styles.contactDetail}>
+              <View style={styles.iconBox}>
+                <MaterialCommunityIcons
+                  name="location-on"
+                  size={20}
+                  color={theme.color.primary2}
+                />
+              </View>
+              <AppText style={styles.lbl}>{info?.addresss}</AppText>
+            </View>
+            <View style={styles.contactDetail}>
+              <View style={styles.iconBox}>
+                <Ionicons
+                  name="call-sharp"
+                  size={20}
+                  color={theme.color.primary2}
+                />
+              </View>
+              <AppText style={styles.lbl}>{info?.phone_number}</AppText>
+            </View>
+            <View style={styles.contactDetail}>
+              <View style={styles.iconBox}>
+                <Entypo name="mail" size={20} color={theme.color.primary2} />
+              </View>
+              <AppText style={styles.lbl}>{info?.email_address}</AppText>
+            </View>
+            <AppText style={[styles.title, styles.getInTouch]}>
+              {info?.form_title}
+            </AppText>
+            <AppInput
+              style={styles.input}
+              placeholder="Name"
+              value={formData?.name}
+              onChangeText={text => onChangeHandler('name', text)}
+              error={errors?.name}
+            />
+            <AppInput
+              style={styles.input}
+              placeholder="Email"
+              autoComplete="email"
+              inputMode="email"
+              value={formData?.email}
+              onChangeText={text => onChangeHandler('email', text)}
+              error={errors?.email}
+            />
+            <AppInput
+              style={styles.input}
+              placeholder="Subject"
+              value={formData?.subject}
+              onChangeText={text => onChangeHandler('subject', text)}
+              error={errors?.subject}
+            />
+            <AppInput
+              style={styles.input}
+              placeholder="Phone Number"
+              inputMode="tel"
+              value={formData?.number}
+              onChangeText={text => onChangeHandler('number', text)}
+              error={errors?.number}
+            />
+            <AppInput
+              style={styles.input}
+              placeholder="Message"
+              multiline={true}
+              value={formData?.message}
+              onChangeText={text => onChangeHandler('message', text)}
+              error={errors?.message}
+            />
+            <View style={styles.buttonContainer}>
+              <AppButton
+                label="Submit"
+                containerStyle={styles.btnContainer}
+                labelStyle={styles.btnLbl}
+                onPress={onSubmit}
+              />
+            </View>
+          </View>
+        </>
       </ScrollView>
       <AppProgressBar isShow={isLoading} />
     </MasterView>
   );
 };
 
-export default ContactUs;
+export default ContactUsPage;

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
   AppHeader,
+  AppMenu,
   AppProgressBar,
   AppSearchBox,
   AppText,
@@ -19,6 +20,7 @@ import {theme} from '../../Shared/theme';
 import {MENU, MENUCAT} from '../../Util/ApiConst';
 import {getRequest} from '../../Util/HttpUtility';
 import FastImage from 'react-native-fast-image';
+import VagitarianIcon from '../../../assets/images/vagitarian-icon.svg';
 
 interface Item {
   id: number;
@@ -39,12 +41,13 @@ const Category = ({navigation, route}: any) => {
   const [search, setSearch] = useState('');
   const [menuList, setMenuList] = useState<Array<MenuList>>([]);
   const [info, setInfo] = useState<any>({});
-  const [isLoading, setLoading] = useState(true);
-  const item = route.params;
+  const [isLoading, setLoading] = useState(false);
+  const {item: parentItem = {}} = route.params || {};
 
   useEffect(() => {
-    fetchMenuTitleImage();
-    fetchMenuCat();
+    // fetchMenuTitleImage();
+    // fetchMenuCat();
+    setMenuList(parentItem?.our_menu_categories_mobile || []);
   }, []);
 
   const fetchMenuTitleImage = async () => {
@@ -98,18 +101,28 @@ const Category = ({navigation, route}: any) => {
       activeOpacity={0.6}
       onPress={() => onMenuPress(item)}>
       <View style={styles.subItemTitleContaier}>
-        {item.food_item_title ? (
-          <AppText style={styles.subCatTitle}>{item.food_item_title}</AppText>
+        {item.food_item_title_mobile ? (
+          <View style={styles.titleIconContainer}>
+            <AppText style={styles.subCatTitle}>
+              {item.food_item_title_mobile}
+            </AppText>
+            {item?.food_menu_icon_mobile ? (
+              <VagitarianIcon height={16} />
+            ) : null}
+          </View>
         ) : null}
-        {item?.food_item_price ? (
+        {item?.food_item_price_mobile ? (
           <AppText style={[styles.label, styles.noteLbl]}>
-            ${Math.floor(item?.food_item_price)?.toFixed(2)}
+            ${(+item?.food_item_price_mobile)?.toFixed(2)}
           </AppText>
         ) : null}
       </View>
-      {item.food_item_content ? (
-        <AppText style={[styles.label, styles.subItemDes]}>
-          {item.food_item_content}
+      {item.food_item_content_mobile ? (
+        <AppText
+          style={[styles.label, styles.subItemDes]}
+          numberOfLines={3}
+          ellipsizeMode="tail">
+          {item.food_item_content_mobile}
         </AppText>
       ) : null}
       <View style={styles.bottomButtonContainer}>
@@ -123,21 +136,25 @@ const Category = ({navigation, route}: any) => {
     </TouchableOpacity>
   );
 
-  const renderCategoryMenuRow = ({item}: any) => (
-    <View style={styles.menuList}>
-      <AppText style={styles.categoryTitle}>{item?.title?.rendered}</AppText>
-      {item.description ? (
-        <AppText style={styles.label}>{item?.acf?.food_menu_note}</AppText>
-      ) : null}
-      <View>
-        <FlatList
-          data={item?.acf?.food_menu_list}
-          renderItem={renderSubCatgoryRow}
-          keyExtractor={(item, index) => `sub_category_${index}`}
-        />
+  const renderCategoryMenuRow = ({item}: any) => {
+    return (
+      <View style={styles.menuList}>
+        <AppText style={styles.categoryTitle}>
+          {item?.our_menu_main_title}
+        </AppText>
+        {item.our_menu_note_mobile ? (
+          <AppText style={styles.label}>{item?.our_menu_note_mobile}</AppText>
+        ) : null}
+        <View>
+          <FlatList
+            data={item?.our_menu_list_mobile}
+            renderItem={renderSubCatgoryRow}
+            keyExtractor={(item, index) => `sub_category_${index}`}
+          />
+        </View>
       </View>
-    </View>
-  );
+    );
+  };
 
   return (
     <MasterView>
@@ -159,33 +176,37 @@ const Category = ({navigation, route}: any) => {
           }
         />
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.container}>
-            <TouchableOpacity onPress={onSearchClick}>
-              <AppSearchBox
-                placeholder="Search Your Menu"
-                value={search}
-                readOnly={true}
-                onChangeText={setSearch}
-              />
-            </TouchableOpacity>
-            <View style={styles.noteContainer}>
-              <AppText style={[styles.label, styles.noteLbl]}>
-                {info?.acf?.menu_note_title}
-                <AppText style={[styles.label]}>
-                  {' '}
-                  {info?.acf?.menu_note_details}
+          <>
+            <View style={styles.container}>
+              <TouchableOpacity onPress={onSearchClick}>
+                <AppSearchBox
+                  placeholder="Search Your Menu"
+                  value={search}
+                  readOnly={true}
+                  onChangeText={setSearch}
+                />
+              </TouchableOpacity>
+              <View style={styles.noteContainer}>
+                <AppText style={[styles.label, styles.noteLbl]}>
+                  {parentItem.mobile__menu_note_title}
+                  <AppText style={[styles.label]}>
+                    {' '}
+                    {parentItem.mobile_menu_note_details}
+                  </AppText>
                 </AppText>
-              </AppText>
+              </View>
+              <View style={styles.imageContainer}>
+                <FastImage
+                  source={{uri: parentItem?.mobile_food_menu_image}}
+                  style={styles.imageMenu}
+                  resizeMode="cover"
+                />
+              </View>
             </View>
-            <View style={styles.imageContainer}>
-              <FastImage
-                source={{uri: info?.food_menu_image}}
-                style={styles.imageMenu}
-                resizeMode="cover"
-              />
-            </View>
+            <AppMenu navigation={navigation} />
+
             {/*style={styles.menuList}*/}
-            <View>
+            <View style={[styles.container, {marginTop: 0}]}>
               <FlatList
                 contentContainerStyle={styles.menuFlatListContainer}
                 // showsVerticalScrollIndicator={false}
@@ -194,7 +215,7 @@ const Category = ({navigation, route}: any) => {
                 keyExtractor={(item, index) => `category_${index}`}
               />
             </View>
-          </View>
+          </>
         </ScrollView>
       </ImageBackground>
       <AppProgressBar isShow={isLoading} />

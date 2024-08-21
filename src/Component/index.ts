@@ -6,6 +6,7 @@ import {SlidetIndicator} from './SliderIndicator';
 import {AppSearchBox} from './AppSearchBox';
 import {AppInput} from './AppInput';
 import {AppProgressBar} from './AppProgressBar';
+import {AppMenu} from './AppMenu';
 
 export {
   MasterView,
@@ -16,4 +17,5 @@ export {
   AppSearchBox,
   AppInput,
   AppProgressBar,
+  AppMenu,
 };

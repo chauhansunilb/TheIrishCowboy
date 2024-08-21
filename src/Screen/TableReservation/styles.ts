@@ -3,12 +3,12 @@ import {theme} from '../../Shared/theme';
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: theme.padding.sm,
     paddingVertical: theme.padding.container,
   },
   imageContainer: {
     borderRadius: 10,
     overflow: 'hidden',
+    marginHorizontal: theme.padding.sm,
     ...theme.shadow,
   },
   image: {
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   formContainer: {
     paddingVertical: theme.padding.container,
     paddingHorizontal: theme.padding.xsm,
+    marginHorizontal: theme.padding.sm,
   },
   input: {
     marginTop: theme.padding.xsm,

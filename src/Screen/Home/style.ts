@@ -8,9 +8,10 @@ const styles = StyleSheet.create({
   },
   heroSliderContainer: {
     // flex: 1,
+    marginTop: -12,
   },
   heroImage: {
-    height: 220,
+    height: 380,
     width: width,
     borderRadius: 10,
     // overflow: 'hidden',
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   indicatorContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -6,
+    marginTop: -8,
   },
   ourMenuContainer: {
     marginTop: theme.padding.sm,
@@ -59,9 +60,17 @@ const styles = StyleSheet.create({
   },
   eventImageStyle: {
     borderRadius: 15,
-    width: '90%',
+    width: '100%',
+    height: 250,
     marginTop: 8,
     overflow: 'hidden',
+  },
+  mb: {
+    marginBottom: 12,
+  },
+  paddingHorizontal: {
+    paddingHorizontal: theme.padding.sm,
+    ...theme.shadow,
   },
 });
 
