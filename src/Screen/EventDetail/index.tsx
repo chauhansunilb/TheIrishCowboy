@@ -18,7 +18,11 @@ const EventDetail = ({navigation, route}: any) => {
     route.params;
 
   const onBookEvent = () => {
-    navigation.push('TableReservation');
+    if (isCateringEvent) {
+      navigation.navigate('ContactUsRoot');
+    } else {
+      navigation.push('TableReservation');
+    }
   };
 
   const getImage = () => {
@@ -71,7 +75,7 @@ const EventDetail = ({navigation, route}: any) => {
 
   const getButton = () => {
     if (isCateringEvent) {
-      return item?.catering_services_link?.title;
+      return item?.catering_services_link;
     } else {
       return 'Book a Table Now';
     }
@@ -83,7 +87,7 @@ const EventDetail = ({navigation, route}: any) => {
         source={require('../../../assets/images/home_bg2.png')}
         resizeMode="cover"
         style={styles.image}>
-        <AppHeader title="Events" isBack={true} />
+        <AppHeader title={isCateringEvent ? "Catering Services" : "Events"} isBack={true} />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             <View style={styles.imageContainer}>

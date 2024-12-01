@@ -536,7 +536,7 @@
 				CODE_SIGN_ENTITLEMENTS = TheIrishCowboy/TheIrishCowboy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = CC4NMCSCL8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TheIrishCowboy/Info.plist;
@@ -546,7 +546,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -570,7 +570,7 @@
 				CODE_SIGN_ENTITLEMENTS = TheIrishCowboy/TheIrishCowboy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = CC4NMCSCL8;
 				INFOPLIST_FILE = TheIrishCowboy/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "The Irish Cowboy";
@@ -579,7 +579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.11;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
